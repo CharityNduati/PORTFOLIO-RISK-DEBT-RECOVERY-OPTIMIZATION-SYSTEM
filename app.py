@@ -276,8 +276,16 @@ Optimal Call Window: {debtor['Optimal Call Time']}
 ---------------------------------------
 Generated on: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
 """
+
+    st.download_button(
+        label="📥 Download Debt Card (TXT)",
+        data=card_data,
+        file_name=f"debt_card_{acc_id}.txt",
+        mime="text/plain"
+    )
+
 # ---------------------------------------------------------
-# FOOTER
+# FOOTER (Unindented at the end of script)
 # ---------------------------------------------------------
 st.markdown("""
 <br><hr style="border: 0; height: 1px; background: linear-gradient(to right, rgba(0,0,0,0), rgba(0,75,135,0.75), rgba(0,0,0,0));">
@@ -293,10 +301,3 @@ st.markdown("""
     </p>
 </div>
 """, unsafe_allow_html=True)
-
-    st.download_button(
-        label="📥 Download Debt Card (TXT)",
-        data=card_data,
-        file_name=f"debt_card_{acc_id}.txt",
-        mime="text/plain"
-    )
