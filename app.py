@@ -332,7 +332,7 @@ st.markdown("""
         ⚖️ Keysian Debt Recovery Unit — Portfolio Analytics Platform
     </p>
     <p style="margin: 4px 0 0 0;">
-        Designed & Developed by <b>Charity Nduati</b> | Portfolio Analytics & Operations Specialist
+        Designed & Developed by <b>Charity Nduati</b> | MI and BI Analyst
     </p>
     <p style="margin: 4px 0 0 0; font-size: 0.78rem; opacity: 0.8;">
         Driven by Machine Learning, CRISP-DM Methodology & Real-Time Risk Optimization &bull; Nairobi, Kenya
