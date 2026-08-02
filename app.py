@@ -20,6 +20,7 @@ st.markdown("""
     .main { background-color: #f8f9fa; }
     .stMetric { background-color: #ffffff; padding: 16px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
     .keysian-header { background-color: #003366; color: white; padding: 18px; border-radius: 8px; text-align: center; margin-bottom: 20px; }
+    .kpi-card { background-color: #ffffff; padding: 18px; border-radius: 8px; border-left: 5px solid #003366; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
     </style>
 """, unsafe_allow_html=True)
 
@@ -29,18 +30,61 @@ st.markdown("""
 @st.cache_data
 def load_default_portfolio():
     return pd.DataFrame({
-        "Account ID": ["KEY-2026-001", "KEY-2026-002", "KEY-2026-003", "KEY-2026-004", "KEY-2026-005"],
-        "Debtor Name": ["Wanjiru Kinuthia", "Ochieng Otieno", "Amina Hussein", "Kiprono Bett", "Mutua Ndiku"],
-        "Client Institution": ["Faulu Microfinance", "Equity Bank", "NCBA", "Faulu Microfinance", "KCB Bank"],
-        "Phone Number": ["+254712345678", "+254723456789", "+254734567890", "+254745678901", "+254756789012"],
-        "Email Address": ["wanjiru@example.co.ke", "ochieng@example.co.ke", "amina@example.co.ke", "bett@example.co.ke", "mutua@example.co.ke"],
-        "Outsourced Amount (KES)": [185000, 420000, 65000, 310000, 95000],
-        "DPD": [65, 140, 22, 110, 40],
-        "Assigned Collector": ["Charity Nduati", "Stephen Jilani", "Cynthia Jemutai", "Joy Njeru", "Chris Karagu"],
-        "Risk Rating": ["High Profile", "Failing Account", "Low Risk", "High Profile", "Standard"],
-        "Optimal Call Window": ["09:00 AM - 11:00 AM", "02:00 PM - 04:00 PM", "10:30 AM - 12:30 PM", "08:30 AM - 10:00 AM", "03:00 PM - 05:00 PM"],
-        "Last Action": ["PTP Agreed", "Ringing No Response", "Call Successful", "Skip Traced", "Pending Follow-up"]
+        "Account ID": [
+            "KEY-2026-001", "KEY-2026-002", "KEY-2026-003", "KEY-2026-004", "KEY-2026-005",
+            "KEY-2026-006", "KEY-2026-007", "KEY-2026-008", "KEY-2026-009", "KEY-2026-010"
+        ],
+        "Debtor Name": [
+            "Wanjiru Kinuthia", "Ochieng Otieno", "Amina Hussein", "Kiprono Bett", "Mutua Ndiku",
+            "Grace Wambui", "David Omwamba", "Hassan Mohamed", "Faith Chebet", "Peter Kamau"
+        ],
+        "Client Institution": [
+            "Faulu Microfinance", "Equity Bank", "NCBA", "Faulu Microfinance", "KCB Bank",
+            "Faulu Microfinance", "Equity Bank", "NCBA", "KCB Bank", "Faulu Microfinance"
+        ],
+        "Phone Number": [
+            "+254712345678", "+254723456789", "+254734567890", "+254745678901", "+254756789012",
+            "+254767890123", "+254778901234", "+254789012345", "+254790123456", "+254701234567"
+        ],
+        "Email Address": [
+            "wanjiru@example.co.ke", "ochieng@example.co.ke", "amina@example.co.ke", "bett@example.co.ke", "mutua@example.co.ke",
+            "grace@example.co.ke", "david@example.co.ke", "hassan@example.co.ke", "faith@example.co.ke", "peter@example.co.ke"
+        ],
+        "Outsourced Amount (KES)": [185000, 420000, 65000, 310000, 95000, 520000, 140000, 88000, 275000, 610000],
+        "Amount Collected 30D (KES)": [45000, 0, 65000, 80000, 20000, 0, 35000, 15000, 100000, 0],
+        "DPD": [65, 140, 22, 110, 40, 185, 75, 15, 95, 210],
+        "Assigned Collector": [
+            "Charity Nduati", "Stephen Jilani", "Cynthia Jemutai", "Joy Njeru", "Chris Karagu",
+            "Sylvia Wambui", "Charity Nduati", "Stephen Jilani", "Cynthia Jemutai", "Joy Njeru"
+        ],
+        "Risk Rating": [
+            "High Profile", "Failing Account", "Low Risk", "High Profile", "Standard",
+            "Failing Account", "Standard", "Low Risk", "High Profile", "Failing Account"
+        ],
+        "Optimal Call Window": [
+            "09:00 AM - 11:00 AM", "02:00 PM - 04:00 PM", "10:30 AM - 12:30 PM", "08:30 AM - 10:00 AM", "03:00 PM - 05:00 PM",
+            "08:00 AM - 10:00 AM", "01:00 PM - 03:00 PM", "11:00 AM - 01:00 PM", "09:30 AM - 11:30 AM", "02:30 PM - 04:30 PM"
+        ],
+        "Last Action": [
+            "PTP Agreed", "Ringing No Response", "Call Successful", "Skip Traced", "Pending Follow-up",
+            "Escalated Legal", "PTP Agreed", "Call Successful", "PTP Agreed", "Ringing No Response"
+        ]
     })
+
+# Helper function to categorize DPD into Standard Recovery Aging Buckets
+def assign_aging_bucket(dpd):
+    if dpd <= 30:
+        return "1. 0 - 30 Days (Current)"
+    elif dpd <= 60:
+        return "2. 31 - 60 Days (Early Delinquency)"
+    elif dpd <= 90:
+        return "3. 61 - 90 Days (Mid-Stage)"
+    elif dpd <= 120:
+        return "4. 91 - 120 Days (Late-Stage)"
+    elif dpd <= 180:
+        return "5. 121 - 180 Days (Severe Risk)"
+    else:
+        return "6. 180+ Days (Default / Legal)"
 
 # ---------------------------------------------------------
 # SIDEBAR NAVIGATION
@@ -67,6 +111,10 @@ if uploaded_file is not None:
 else:
     df_portfolio = load_default_portfolio()
 
+# Ensure aging buckets exist in data
+if "DPD" in df_portfolio.columns:
+    df_portfolio["Aging Bucket"] = df_portfolio["DPD"].apply(assign_aging_bucket)
+
 page = st.sidebar.radio("Navigation", [
     "📌 Executive Overview & Alerts",
     "📂 Full Allocated Portfolio Directory",
@@ -90,28 +138,91 @@ if page == "📌 Executive Overview & Alerts":
         </div>
     """, unsafe_allow_html=True)
     
-    col1, col2, col3, col4 = st.columns(4)
-    col1.metric("Active Allocated Accounts", f"{len(df_portfolio):,}")
+    # --- MACRO KPI METRICS ---
+    total_count = len(df_portfolio)
+    total_outsourced = df_portfolio["Outsourced Amount (KES)"].sum() if "Outsourced Amount (KES)" in df_portfolio.columns else 0
+    total_collected_30d = df_portfolio["Amount Collected 30D (KES)"].sum() if "Amount Collected 30D (KES)" in df_portfolio.columns else 0
     
-    total_val = df_portfolio["Outsourced Amount (KES)"].sum() if "Outsourced Amount (KES)" in df_portfolio.columns else 0
-    col2.metric("Total Portfolio Exposure", f"KES {total_val:,.2f}")
-    col3.metric("Active Field Collectors", "6 Agents")
-    col4.metric("Month-to-Date PTP Conversion", "71.8%")
+    # Calculate Recovery Percentage & Average Balance
+    recovery_rate = (total_collected_30d / total_outsourced * 100) if total_outsourced > 0 else 0.0
+    avg_ticket_size = (total_outsourced / total_count) if total_count > 0 else 0.0
+    
+    col1, col2, col3, col4, col5 = st.columns(5)
+    col1.metric("Total Debt Portfolio", f"{total_count:,} Accounts", help="Total active delinquent accounts outsourced to Keysian")
+    col2.metric("Total Portfolio Exposure", f"KES {total_outsourced:,.2f}")
+    col3.metric("Collected (Last 30 Days)", f"KES {total_collected_30d:,.2f}", delta=f"{recovery_rate:.2f}% Rec. Rate")
+    col4.metric("30-Day Recovery Rate", f"{recovery_rate:.2f}%")
+    col5.metric("Avg Account Balance", f"KES {avg_ticket_size:,.2f}")
     
     st.markdown("---")
-    st.subheader("🔥 Priority Portfolio & Institution Alerts")
+    
+    # --- PORTFOLIO AGING ANALYSIS (DPD BUCKETS) ---
+    st.subheader("📊 Portfolio Aging Analysis & Recovery Performance")
+    
+    if "Aging Bucket" in df_portfolio.columns and "Outsourced Amount (KES)" in df_portfolio.columns:
+        # Grouping by aging buckets
+        aging_summary = df_portfolio.groupby("Aging Bucket").agg(
+            Account_Count=("Account ID", "count"),
+            Total_Outsourced_KES=("Outsourced Amount (KES)", "sum"),
+            Collected_30D_KES=("Amount Collected 30D (KES)", "sum") if "Amount Collected 30D (KES)" in df_portfolio.columns else ("Outsourced Amount (KES)", lambda x: 0)
+        ).reset_index()
+        
+        # Calculate Bucket-Level Recovery Rate & Share
+        aging_summary["Recovery Rate (%)"] = (aging_summary["Collected_30D_KES"] / aging_summary["Total_Outsourced_KES"] * 100).round(2)
+        aging_summary["Portfolio Share (%)"] = (aging_summary["Total_Outsourced_KES"] / total_outsourced * 100).round(2)
+        
+        # Display Columns Formatted
+        display_aging = aging_summary.copy()
+        display_aging["Total Outsourced (KES)"] = display_aging["Total_Outsourced_KES"].apply(lambda x: f"KES {x:,.2f}")
+        display_aging["Collected 30D (KES)"] = display_aging["Collected_30D_KES"].apply(lambda x: f"KES {x:,.2f}")
+        display_aging["Recovery Rate"] = display_aging["Recovery Rate (%)"].apply(lambda x: f"{x:.2f}%")
+        display_aging["Portfolio Exposure Share"] = display_aging["Portfolio Share (%)"].apply(lambda x: f"{x:.2f}%")
+        
+        col_left, col_right = st.columns([3, 2])
+        
+        with col_left:
+            st.markdown("##### **Aging Bucket Summary Breakdown**")
+            st.dataframe(
+                display_aging[[
+                    "Aging Bucket", "Account_Count", "Total Outsourced (KES)", 
+                    "Collected 30D (KES)", "Recovery Rate", "Portfolio Exposure Share"
+                ]],
+                use_container_width=True
+            )
+            
+        with col_right:
+            st.markdown("##### **Exposure Share by Aging Category**")
+            chart_data = aging_summary.set_index("Aging Bucket")[["Total_Outsourced_KES", "Collected_30D_KES"]]
+            chart_data.columns = ["Total Exposure", "Collected (30D)"]
+            st.bar_chart(chart_data)
+
+    st.markdown("---")
+    
+    # --- INSTITUTION & RISK ALERTS ---
+    st.subheader("🔥 Priority Portfolio & Institution Escalations")
     
     c1, c2 = st.columns(2)
     with c1:
-        st.error("### 🔴 Client Institutions Requiring Escalation")
-        st.write("**Faulu Microfinance Batch 2** — High delinquency detected for accounts > 90 DPD. Recommended: Trigger legal demand letters or field team dispatch.")
-        if st.button("Trigger Mass Digital Outreach for Faulu Accounts"):
-            st.success("Automated campaign queued for Faulu Microfinance portfolio!")
+        st.error("### 🔴 Client Institutions Requiring Immediate Action")
+        if "Client Institution" in df_portfolio.columns:
+            inst_summary = df_portfolio.groupby("Client Institution").agg(
+                Accounts=("Account ID", "count"),
+                Exposure=("Outsourced Amount (KES)", "sum")
+            ).reset_index().sort_values(by="Exposure", ascending=False)
+            
+            st.dataframe(inst_summary, use_container_width=True)
+        st.caption("⚡ **Recommendation:** Trigger legal demand letters or dispatch field teams for accounts exceeding 90+ DPD.")
+        if st.button("Trigger Mass Digital Outreach for High DPD Accounts"):
+            st.success("Automated outreach campaign queued for delinquent accounts!")
 
     with c2:
-        st.warning("### ⚡ High-Profile Debtors Escalation Matrix")
+        st.warning("### ⚡ High-Profile & Failing Debtors Matrix")
         if "Risk Rating" in df_portfolio.columns:
-            st.dataframe(df_portfolio[df_portfolio["Risk Rating"] == "High Profile"][["Account ID", "Debtor Name", "Outsourced Amount (KES)", "Assigned Collector"]])
+            high_risk = df_portfolio[df_portfolio["Risk Rating"].isin(["High Profile", "Failing Account"])]
+            st.dataframe(
+                high_risk[["Account ID", "Debtor Name", "Client Institution", "Outsourced Amount (KES)", "DPD", "Assigned Collector"]],
+                use_container_width=True
+            )
 
 # ---------------------------------------------------------
 # 2. FULL ALLOCATED PORTFOLIO DIRECTORY
@@ -179,7 +290,7 @@ elif page == "👥 Collector Performance Portal":
     st.subheader(f"Active Accounts Assigned to {selected_agent}")
     if "Assigned Collector" in df_portfolio.columns:
         agent_accounts = df_portfolio[df_portfolio["Assigned Collector"] == selected_agent]
-        st.dataframe(agent_accounts)
+        st.dataframe(agent_accounts, use_container_width=True)
     else:
         st.info("Upload a dataset with an 'Assigned Collector' column to view live breakdown.")
 
@@ -332,7 +443,7 @@ st.markdown("""
         ⚖️ Keysian Debt Recovery Unit — Portfolio Analytics Platform
     </p>
     <p style="margin: 4px 0 0 0;">
-        Designed & Developed by <b>Charity Nduati</b> | MI and BI Analyst
+        Designed & Developed by <b>Charity Nduati</b> | Portfolio Analytics & Operations Specialist
     </p>
     <p style="margin: 4px 0 0 0; font-size: 0.78rem; opacity: 0.8;">
         Driven by Machine Learning, CRISP-DM Methodology & Real-Time Risk Optimization &bull; Nairobi, Kenya
