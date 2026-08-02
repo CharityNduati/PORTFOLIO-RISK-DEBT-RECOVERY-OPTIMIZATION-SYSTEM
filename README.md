@@ -84,6 +84,7 @@ portfolio-risk-debt-recovery-optimization/
 ├── app.py                             # Streamlit web application entry point
 ├── requirements.txt                   # Python package dependencies
 └── README.md                          # Project documentation
+
 🔮 Future Enhancements
 [ ] Real-time prediction API integration using FastAPI.
 
@@ -94,7 +95,7 @@ portfolio-risk-debt-recovery-optimization/
 [ ] Model performance monitoring and data drift detection pipelines.
 
 ⚠️ Disclaimer
-This project was developed for educational and portfolio demonstration purposes. All sensitive customer information has been anonymized.
+This project was developed for portfolio demonstration purposes. All sensitive customer information has been anonymized.
 
 👩🏽‍💻 Author
 Charity Nduati
@@ -105,5 +106,4 @@ Specializations: Machine Learning | Financial Analytics | Predictive Modeling | 
 
 Email: charitynduati17@gmail.com
 
-
-GitHub: (https://github.com/CharityNduati)
+GitHub: https://github.com/CharityNduati
