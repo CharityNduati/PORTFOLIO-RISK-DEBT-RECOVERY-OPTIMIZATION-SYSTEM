@@ -434,7 +434,7 @@ Generated on: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
     )
 
 # ---------------------------------------------------------
-# CONSISTENT CREATOR FOOTNOTE
+# UPDATED FOOTNOTE
 # ---------------------------------------------------------
 st.markdown("""
 <br><hr style="border: 0; height: 1px; background: linear-gradient(to right, rgba(0,0,0,0), rgba(0,51,102,0.75), rgba(0,0,0,0));">
@@ -443,10 +443,10 @@ st.markdown("""
         ⚖️ Keysian Debt Recovery Unit — Portfolio Analytics Platform
     </p>
     <p style="margin: 4px 0 0 0;">
-        Designed & Developed by <b>Charity Nduati</b> | Accounts Manager, Portfolio Analytics & Operations
+        Designed & Developed by <b>Charity Nduati</b> | Machine Learning Data Scientist | Credit Risk & Portfolio Analytics | Predictive Modeling
     </p>
     <p style="margin: 4px 0 0 0; font-size: 0.78rem; opacity: 0.8;">
-        Spectrum International Ltd / Keysian Auctioneers &bull; Nairobi, Kenya
+        Keysian Auctioneers &bull; Nairobi, Kenya
     </p>
 </div>
 """, unsafe_allow_html=True)
