@@ -1,3 +1,4 @@
+
 # 📈 Portfolio Intelligence & Predictive Debt Recovery Analytics
 
 [![Methodology](https://img.shields.io/badge/Methodology-CRISP--DM-orange.svg)](https://en.wikipedia.org/wiki/Cross-industry_standard_process_for_data_mining)
@@ -89,7 +90,7 @@ PORTFOLIO-RISK-DEBT-RECOVERY-OPTIMIZATION-SYSTEM/
 [ ] Model performance monitoring and data drift detection pipelines.
 
 ⚠️ Disclaimer
-This project was developed for portfolio demonstration purposes. All sensitive customer information has been anonymized.
+This project was developed for educational and portfolio demonstration purposes. All sensitive customer information has been anonymized.
 
 👩🏽‍💻 Author
 Charity Nduati
