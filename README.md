@@ -100,6 +100,7 @@ Specializations: Machine Learning | Financial Analytics | Predictive Modeling | 
 
 Email: charitynduati17@gmail.com
 
-
+LinkedIn: [Your LinkedIn URL]
 
 GitHub: https://github.com/CharityNduati
+
