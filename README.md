@@ -34,7 +34,7 @@ This project follows the **CRISP-DM** framework:
 
 
 1. **Business Understanding:** Defined key performance drivers to improve collector productivity and increase recovery yields.
-2. **Data Understanding:** Explored `active_portfolio.xlsx` across 45+ variables covering client details, balances, Days Past Due (DPD), and contact metrics.
+2. **Data Understanding:** Explored portfolio data across 45+ variables covering client details, balances, Days Past Due (DPD), and contact metrics.
 3. **Data Preparation:** Handled missing values, engineered recovery indicators (contactability ratios, balance tiers, temporal features), and prepared variables for modeling.
 4. **Modeling:** Developed supervised classification models (Logistic Regression, Random Forest, **XGBoost**) and unsupervised clustering (**K-Means**) to group accounts and predict payment success.
 5. **Evaluation:** Evaluated models using Accuracy, Precision, Recall, F1-score, and ROC-AUC. **XGBoost** emerged as the top performer with an **ROC-AUC of 0.94**.
@@ -56,7 +56,7 @@ This project follows the **CRISP-DM** framework:
 
 The interactive web application makes analytics and machine learning predictions accessible to operational teams without requiring any technical setup:
 
-👉 **[Launch Live Streamlit Application](https://github.com/YOUR_USERNAME/portfolio-risk-debt-recovery-optimization)**
+👉 **[Launch Live Streamlit Application](https://github.com/CharityNduati/PORTFOLIO-RISK-DEBT-RECOVERY-OPTIMIZATION-SYSTEM)**
 
 ### Key Application Features:
 * **📊 Executive Dashboard:** Portfolio overview, active account distribution, outstanding balance insights, and recovery opportunity analysis.
@@ -69,22 +69,16 @@ The interactive web application makes analytics and machine learning predictions
 ## 📂 Repository Structure
 
 ```text
-portfolio-risk-debt-recovery-optimization/
+PORTFOLIO-RISK-DEBT-RECOVERY-OPTIMIZATION-SYSTEM/
 │
-├── data/
-│   └── active_portfolio.xlsx          # Outsourced active accounts dataset
-│
-├── notebooks/
-│   └── portfolio_risk_analysis.ipynb   # Complete CRISP-DM analytical workflow
-│
-├── models/
-│   ├── xgboost_model.pkl              # Trained XGBoost classification artifact
-│   └── scaler.pkl                     # Fitted StandardScaler artifact
-│
-├── app.py                             # Streamlit web application entry point
-├── requirements.txt                   # Python package dependencies
-└── README.md                          # Project documentation
-
+├── active_portfolio - 2026-07-31...xlsx  # Outsourced active accounts dataset
+├── Notebook.ipynb                         # Complete CRISP-DM analytical workflow notebook
+├── app.py                                 # Streamlit web application entry point
+├── portfolio_recovery_xgb_model.pkl       # Trained XGBoost classification artifact
+├── portfolio_scaler.pkl                   # Fitted StandardScaler artifact
+├── model_features.pkl                     # Saved model feature columns mapping
+├── requirements.txt                       # Python package dependencies
+└── README.md                              # Project documentation
 🔮 Future Enhancements
 [ ] Real-time prediction API integration using FastAPI.
 
