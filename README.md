@@ -1,4 +1,4 @@
-# 📈 Portfolio Intelligence & Predictive Debt Recovery Analytics<img width="3141" height="263" alt="image" src="https://github.com/user-attachments/assets/1049fafc-e22e-4d6d-823a-eb371bfef91b" />
+# 📈 Portfolio Intelligence & Predictive Debt Recovery Analytics
 
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://portfolio-risk-debt-recovery-optimization-system-hwvhqiyk9nt5e.streamlit.app/)
