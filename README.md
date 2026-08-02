@@ -1,4 +1,4 @@
-# 📈 Machine Learning-Driven Portfolio Risk & Debt Recovery Optimization
+# 📈 Portfolio Risk & Debt Recovery Optimization
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://portfolio-risk-debt-recovery-optimization-system-hwvhqiyk9nt5e.streamlit.app/)
 
