@@ -82,7 +82,7 @@ PORTFOLIO-RISK-DEBT-RECOVERY-OPTIMIZATION-SYSTEM/
 └── README.md                              # Project documentation
 
 
-🔮 Future Enhancements
+##🔮 Future Enhancements
 [ ] Real-time prediction API integration using FastAPI.
 
 [ ] Direct CRM and collection platform connectors.
@@ -91,16 +91,14 @@ PORTFOLIO-RISK-DEBT-RECOVERY-OPTIMIZATION-SYSTEM/
 
 [ ] Model performance monitoring and data drift detection pipelines.
 
-⚠️ Disclaimer
-This project was developed for educational and portfolio demonstration purposes. All sensitive customer information has been anonymized.
+##⚠️ Disclaimer
+This project was developed for portfolio demonstration purposes. All sensitive customer information has been anonymized.
 
-👩🏽‍💻 Author
-Charity Nduati
+## 👩🏽‍💻 Author
 
-Data Science & Portfolio Analytics Professional
+**Charity Nduati**  
+*Data Science & Portfolio Analytics Professional*  
 
-Specializations: Machine Learning | Financial Analytics | Predictive Modeling | Portfolio Risk Analysis | Business Intelligence
-
-Email: charitynduati17@gmail.com
-
-GitHub: https://github.com/CharityNduati
+**Specializations:** Machine Learning | Financial Analytics | Predictive Modeling | Portfolio Risk Analysis | Business Intelligence  <br>
+**Email:** charitynduati17@gmail.com  <br>
+**GitHub:** [https://github.com/CharityNduati](https://github.com/CharityNduati)
