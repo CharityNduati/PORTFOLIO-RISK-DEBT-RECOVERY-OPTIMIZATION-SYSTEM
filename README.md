@@ -1,4 +1,3 @@
-
 # 📈 Portfolio Intelligence & Predictive Debt Recovery Analytics
 
 [![Methodology](https://img.shields.io/badge/Methodology-CRISP--DM-orange.svg)](https://en.wikipedia.org/wiki/Cross-industry_standard_process_for_data_mining)
@@ -19,7 +18,7 @@ The solution predicts debtor payment propensity, segments portfolio risk profile
 
 ## 🎯 Business Context & Problem Statement
 
-* **The Portfolio:** Manages **2,709 outsourced accounts** representing a total portfolio value of **KES 232.59 Million**.
+* **The Portfolio:** Manages **2,700+ outsourced accounts** representing a high-value portfolio.
 * **The Challenge:** Traditional manual prioritization leads to inefficient collector time allocation, delayed recoveries, low engagement rates, and missed high-value opportunities.
 * **The Objective:** Leverage historical account data and machine learning to identify high-potential accounts, optimize collection resources, segment portfolios for targeted outreach, and provide transparent, actionable predictions through a user-friendly app.
 
@@ -35,7 +34,7 @@ This project follows the **CRISP-DM** framework:
 
 
 1. **Business Understanding:** Defined key performance drivers to improve collector productivity and increase recovery yields.
-2. **Data Understanding:** Explored portfolio data across 45+ variables covering client details, balances, Days Past Due (DPD), and contact metrics.
+2. **Data Understanding:** Explored portfolio data across multiple variables covering client details, balances, Days Past Due (DPD), and contact metrics.
 3. **Data Preparation:** Handled missing values, engineered recovery indicators (contactability ratios, balance tiers, temporal features), and prepared variables for modeling.
 4. **Modeling:** Developed supervised classification models (Logistic Regression, Random Forest, **XGBoost**) and unsupervised clustering (**K-Means**) to group accounts and predict payment success.
 5. **Evaluation:** Evaluated models using Accuracy, Precision, Recall, F1-score, and ROC-AUC. **XGBoost** emerged as the top performer with an **ROC-AUC of 0.94**.
@@ -80,9 +79,7 @@ PORTFOLIO-RISK-DEBT-RECOVERY-OPTIMIZATION-SYSTEM/
 ├── model_features.pkl                     # Saved model feature columns mapping
 ├── requirements.txt                       # Python package dependencies
 └── README.md                              # Project documentation
-
-
-##🔮 Future Enhancements
+🔮 Future Enhancements
 [ ] Real-time prediction API integration using FastAPI.
 
 [ ] Direct CRM and collection platform connectors.
@@ -91,14 +88,18 @@ PORTFOLIO-RISK-DEBT-RECOVERY-OPTIMIZATION-SYSTEM/
 
 [ ] Model performance monitoring and data drift detection pipelines.
 
-##⚠️ Disclaimer
+⚠️ Disclaimer
 This project was developed for portfolio demonstration purposes. All sensitive customer information has been anonymized.
 
-## 👩🏽‍💻 Author
+👩🏽‍💻 Author
+Charity Nduati
 
-**Charity Nduati**  
-*Data Science & Portfolio Analytics Professional*  
+Data Science & Portfolio Analytics Professional
 
-**Specializations:** Machine Learning | Financial Analytics | Predictive Modeling | Portfolio Risk Analysis | Business Intelligence  <br>
-**Email:** charitynduati17@gmail.com  <br>
-**GitHub:** [https://github.com/CharityNduati](https://github.com/CharityNduati)
+Specializations: Machine Learning | Financial Analytics | Predictive Modeling | Portfolio Risk Analysis | Business Intelligence
+
+Email: charitynduati17@gmail.com
+
+LinkedIn: [Your LinkedIn URL]
+
+GitHub: https://github.com/CharityNduati
