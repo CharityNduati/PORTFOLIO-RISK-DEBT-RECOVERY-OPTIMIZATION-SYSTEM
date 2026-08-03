@@ -8,7 +8,7 @@
 
 ## 📌 Project Overview
 
-Debt recovery organizations manage thousands of delinquent accounts across multiple clients. Traditional collection approaches typically rely on manual prioritization, static reports, and collector intuition. 
+Debt recovery agents manage thousands of delinquent accounts across multiple clients. Traditional collection approaches typically rely on manual prioritization, static reports, and collector intuition. 
 
 This project develops an end-to-end **machine learning-powered debt recovery analytics system** that transforms traditional collection operations into a data-driven decision support framework. 
 
